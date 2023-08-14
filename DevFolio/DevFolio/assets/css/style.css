@@ -1458,3 +1458,14 @@ footer .credits {
 footer .credits a {
   color: #fff;
 }
+
+/*--------------------------------------------------------------
+# Extras
+--------------------------------------------------------------*/
+object {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 22px;
+  padding-top: 22px;
+}
