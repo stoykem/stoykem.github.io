@@ -1,8 +1,7 @@
 "use strict";
-//TEST2
 
-//IIFE - Immediately Invoked Function Expression
-//AKA - Anonymous Self-Executing Function
+// IIFE - Immediately Invoked Function Expression
+// AKA - Anonymous Self-Executing Function
 
 (function(){
 
@@ -41,7 +40,38 @@
             //console.log("About Us Button Clicked!");
             location.href = "about.html";
         });
+
+        let MainContent = document.getElementsByTagName("main")[0];
+
+        // Create the main paragraph element
+        let MainParagraph = document.createElement("p");
+        MainParagraph.setAttribute("id", "MainParagraph")
+        MainParagraph.setAttribute("class", "mt-3")
+
+        // Concatenate the strings using template literals
+        let FirstString = "This is";
+        let SecondString = `${FirstString} the Main Paragraph.`;
+
+        MainParagraph.textContent = SecondString;
+        MainContent.appendChild(MainParagraph);
+
+        // Create the article element
+        let Article = document.createElement("article");
+        Article.setAttribute("class", "container");
+
+        // Create the article paragraph element
+        let ArticleParagraph = document.createElement("p");
+        ArticleParagraph.setAttribute("id", "ArticleParagraph");
+        ArticleParagraph.setAttribute("class", "mt-3");
+        ArticleParagraph.textContent = "This is my article paragraph";
+
+        // Append the article paragraph to the article element
+        Article.appendChild(ArticleParagraph);
+
+        // Append the article element to the document body
+        document.body.appendChild(Article);
     }
+
     function DisplayProductsPage()
     {
         console.log("Reached Products Page");
