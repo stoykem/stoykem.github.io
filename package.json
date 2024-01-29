@@ -1,8 +1,8 @@
 {
-  "name": "Week2",
+  "name": "Week3",
   "version": "1.0.0",
-  "description": "ICE 1",
-  "main": "index.js",
+  "description": "Webpage for INFT2202",
+  "main": "index.html",
   "author": "Miguel Stoyke",
   "license": "MIT",
   "dependencies": {
