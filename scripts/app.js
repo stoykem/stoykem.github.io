@@ -5,6 +5,38 @@
 
 (function(){
 
+    let fullName = document.getElementById("fullName");
+    let contactNumber = document.getElementById("contactNumber");
+    let emailAddress = document.getElementById("emailAddress");
+
+    class Contact
+    {
+        constructor(fullName, contactNumber, emailAddress)
+        {
+            this.FullName = fullName || "";
+            this.ContactNumber = contactNumber || "";
+            this.EmailAddress = emailAddress || "";
+        }
+
+        serialize()
+        {
+            if (this.FullName !== "" && this.ContactNumber !== "" && this.EmailAddress !== "") {
+                return `${this.FullName}, ${this.ContactNumber}, ${this.EmailAddress}`;
+            }
+            console.error("One or more of the properties of the Contact object are missing or invalid");
+            return null;
+        }
+
+        deserialize(data)
+        {
+            let propertyArray = data.split(",");
+            this.FullName = propertyArray[0];
+            this.ContactNumber = propertyArray[1];
+            this.EmailAddress = propertyArray[2];
+            this.Message = propertyArray[3];
+        }
+    }
+
     function Start()
     {
         console.log("App Started!");
@@ -89,7 +121,63 @@
 
     function DisplayContactPage()
     {
-        console.log("Reached Contact Page");
+        console.log("Reached Contact Us Page");
+
+        let fullName = document.getElementById("fullName");
+        let contactNumber = document.getElementById("contactNumber");
+        let emailAddress = document.getElementById("emailAddress");
+
+        let sendButton = document.getElementById("sendButton");
+        let subscribeCheckbox = document.getElementById("subscribeCheckbox");
+
+        sendButton.addEventListener("click", function(event)
+        {
+            if(subscribeCheckbox.checked)
+            {
+                let contact = new Contact(fullName.value, contactNumber.value, emailAddress.value);
+                if(contact.serialize())
+                {
+                    let key = contact.FullName.substring(0,1) + Date.now();
+                    localStorage.setItem(key, contact.serialize());
+                }
+            }
+        });
     }
+
+    function DisplayContactListPage()
+    {
+        console.log("Contact List Page");
+
+        if(localStorage.length > 0)
+        {
+            let contactList = document.getElementById("contactList");
+            let data = "";
+
+            let keys = Object.keys(localStorage);
+
+            let index=1;
+            for(const key of keys)
+            {
+                let contactData = localStorage.getItem(key);
+                let contact = new Contact();
+                contact.deserialize(contactData);
+                data += `<tr>
+                            <th scope="row" class="text-center">${index}</th>
+                            <td>${contact.FullName}</td>
+                            <td>${contact.ContactNumber}</td>
+                            <td>${contact.EmailAddress}</td>
+                        </tr>`;
+
+                index++;
+            }
+            contactList.innerHTML = data;
+        }
+    }
+
+    if (document.title === "Contact List") {
+        DisplayContactListPage();
+    }
+
+
 
 })();
